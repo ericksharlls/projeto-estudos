@@ -16,5 +16,5 @@ public class SalaModel {
     private Boolean distribuir;
 	private PredioModel predio;
 	private PerfilSalaTurmaModel perfilSalaTurma;
-    // Alteração 01 na feature refactor/SalaModel
+    // Alteração 02 na feature refactor/SalaModel
 }
