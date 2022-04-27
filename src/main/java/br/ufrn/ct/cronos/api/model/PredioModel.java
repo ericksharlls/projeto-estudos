@@ -12,5 +12,5 @@ public class PredioModel {
 
     private String descricao;
     
-    // Alteração 02 na feature refactor/PredioModel
+    // Alteração 01 na feature feature/predio
 }
