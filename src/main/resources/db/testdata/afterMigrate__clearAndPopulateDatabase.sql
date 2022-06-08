@@ -5,7 +5,16 @@ TRUNCATE TABLE perfil_sala_turma;
 TRUNCATE TABLE periodo;
 TRUNCATE TABLE sala;
 TRUNCATE TABLE departamento;
+TRUNCATE TABLE tipo_funcionario;
+TRUNCATE TABLE funcionario;
 TRUNCATE TABLE turma;
+TRUNCATE TABLE turma_docente;
+TRUNCATE TABLE disponibilidade_sala;
+TRUNCATE TABLE horario;
+TRUNCATE TABLE agendamento;
+TRUNCATE TABLE usuario;
+TRUNCATE TABLE papel_usuario;
+TRUNCATE TABLE permissao_usuario;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -30,6 +39,72 @@ INSERT INTO sala (nome_sala, descricao_sala, capacidade_sala, tipo_quadro_sala, 
 ("A3", "Sala A3", 35, "Negro", true, true, true, 2, 2),
 ("A4", "Sala A4", 35, "Branco", true, true, true, 2, 2),
 ("A5", "Sala A5", 35, "Branco", true, true, true, 2, 2);
+
+INSERT INTO departamento (nome_departamento, descricao_departamento, id_departamento_sigaa) VALUES 
+('DEPARTAMENTO DE ARQUITETURA', 'DEPARTAMENTO DE ARQUITETURA', 10090),
+('DEPARTAMENTO DE ENGENHARIA CIVIL', 'DEPARTAMENTO DE ENGENHARIA CIVIL', 10091),
+('DEPARTAMENTO DE ENGENHARIA ELÉTRICA', 'DEPARTAMENTO DE ENGENHARIA ELÉTRICA', 10092);
+
+INSERT INTO tipo_funcionario (nome_tipo_funcionario,descricao_tipo_funcionario) VALUES 
+('Docente','Perfil Para Docentes'),
+('Técnico-administrativo','Perfil Para Técnicos-administrativo'),
+('Discente','Perfil Para Discentes'),('Terceirizado','Perfil Para Terceirizados');
+
+INSERT INTO funcionario (nome_funcionario, matricula_funcionario, cpf_funcionario, email_funcionario, telefone_funcionario, 
+                                ramal_funcionario, id_sigaa_funcionario, id_tipo_funcionario) VALUES 
+('Bartô Galeno', '1234567', '123456789-0', 'barto@ufrn.br', '12345-6789', '123', 120110, 1),
+('Reginaldo Rossi', '7654321', '32145478999', 'reginaldo@ufrn.br', '4455-6677', '987', 120111, 1),
+('Zezo dos Teclados', '8954133', '12198477899', 'zezo@ufrn.br', '2451-2311', '756', 120112, 1);
+
+INSERT INTO usuario (id_usuario, login_usuario, senha_usuario, ativo_usuario, tentativas_login_usuario, id_funcionario) VALUES 
+(1, 'barto', MD5('987456'), 1, 0, 1);
+
+INSERT INTO papel_usuario (id_papel, nome_papel, descricao_papel) VALUES (1, 'ROLE_ADMINISTRADOR', 'Perfil para administradores');
+
+INSERT INTO permissao_usuario (id_papel, id_usuario) VALUES (1, 1);
+
+INSERT INTO turma (codigo_componente_turma, nome_componente_turma, nome_docente_turma, horario_turma, capacidade_turma, numero_turma, 
+        alunos_matriculados_turma, distribuir, local, id_perfil, id_predio, id_periodo, id_departamento, id_sala_temp, id_turma_sigaa) VALUES 
+    ('ARQ001', 'ARQUITETURA 01', NULL, '35M12', 50, 1, 0, 1, 'INDEFINIDO', 1, 2, 1, 1, NULL, 200100),
+    ('ARQ002', 'ARQUITETURA 02', NULL, '24T1234', 40, 1, 0, 1, 'INDEFINIDO', 3, 1, 1, 1, NULL, 200101),
+    ('CIV001', 'CIVIL 01', NULL, '36M56', 20, 1, 0, 1, 'INDEFINIDO', 2, 2, 1, 2, NULL, 200102),
+    ('CIV001', 'CIVIL 01', NULL, '25T56', 30, 2, 0, 1, 'INDEFINIDO', 1, 2, 1, 2, NULL, 200103),
+    ('ELE001', 'ELETRICA 01', NULL, '25N34', 35, 1, 0, 1, 'INDEFINIDO', 3, 2, 1, 3, NULL, 200104);
+
+INSERT INTO turma_docente (id_turma, id_docente) VALUES 
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 2),
+(4, 3);
+
+INSERT INTO horario (id_horario, horario, inicio_horario, termino_horario, horario_intermediario, turno, inicio_horario_absoluto, termino_horario_absoluto) VALUES
+(1, 1, '06:30:00', '07:50:59', '07:26:00', 'M', '07:00:00', '07:50:00'),
+(2, 2, '07:51:00', '08:40:59', '08:15:00', 'M', '07:50:00', '08:40:00'),
+(3, 3, '08:41:00', '09:45:59', '09:20:00', 'M', '08:55:00', '09:45:00'),
+(4, 4, '09:46:00', '10:35:59', '10:10:00', 'M', '09:45:00', '10:35:00'),
+(5, 5, '10:36:00', '11:40:59', '11:15:00', 'M', '10:50:00', '11:40:00'),
+(6, 6, '11:41:00', '12:30:59', '12:05:00', 'M', '11:40:00', '12:30:00'),
+(7, 1, '12:31:00', '13:50:59', '13:25:00', 'T', '13:00:00', '13:50:00'),
+(8, 2, '13:51:00', '14:40:59', '13:15:00', 'T', '13:50:00', '14:40:00'),
+(9, 3, '14:41:00', '15:45:59', '15:20:00', 'T', '14:55:00', '15:45:00'),
+(10, 4, '15:46:00', '16:35:59', '16:10:00', 'T', '15:45:00', '16:35:00'),
+(11, 5, '16:36:00', '17:40:59', '17:15:00', 'T', '16:50:00', '17:40:00'),
+(12, 6, '17:41:00', '18:30:59', '18:05:00', 'T', '17:40:00', '18:30:00'),
+(13, 1, '18:31:00', '19:35:59', '19:10:00', 'N', '18:45:00', '19:35:00'),
+(14, 2, '19:36:00', '20:25:59', '20:00:00', 'N', '19:35:00', '20:25:00'),
+(15, 3, '20:26:00', '21:25:59', '21:00:00', 'N', '20:35:00', '21:25:00'),
+(16, 4, '21:26:00', '23:00:00', '21:50:00', 'N', '21:25:00', '22:15:00');
+
+INSERT INTO agendamento (motivo, id_funcionario, id_periodo, hora_realizacao_agendamento, id_usuario_sistema) VALUES 
+("Aula", 1, 1, '2022-06-06 12:00:00', 1);
+
+INSERT INTO disponibilidade_sala (data_reserva, id_sala, id_periodo, id_horario_sala, id_turma, id_agendamento) VALUES 
+('2022-06-07', 1, 1, 1, 1, 1),
+('2022-06-09', 1, 1, 2, 1, 1),
+('2022-06-14', 1, 1, 1, 1, 1),
+('2022-06-16', 1, 1, 2, 1, 1);
 
 -- INSERT INTO departamento (id_departamento, nome_departamento, descricao_departamento) VALUES 
 -- (1,'Departamento de Arquitetura','Departamento do Curso de Arquitetura e Urbanismo'),
