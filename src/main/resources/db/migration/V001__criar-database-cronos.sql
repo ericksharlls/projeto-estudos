@@ -180,7 +180,7 @@ CREATE TABLE `funcionario` (
   `id_sigaa_funcionario` int(11) DEFAULT NULL,
   `id_tipo_funcionario` tinyint(4) DEFAULT '3',
   PRIMARY KEY (`id_funcionario`)
-) ENGINE=InnoDB AUTO_INCREMENT=1667 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -259,7 +259,7 @@ CREATE TABLE `papel_usuario` (
   `nome_papel` varchar(40) NOT NULL,
   `descricao_papel` varchar(60) NOT NULL,
   PRIMARY KEY (`id_papel`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -394,7 +394,7 @@ CREATE TABLE `tipo_funcionario` (
   `nome_tipo_funcionario` varchar(30) NOT NULL,
   `descricao_tipo_funcionario` varchar(55) NOT NULL,
   PRIMARY KEY (`id_tipo_funcionario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -472,7 +472,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuario_funcionario1_idx` (`id_funcionario`),
   CONSTRAINT `fk_usuario_funcionario1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id_funcionario`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
