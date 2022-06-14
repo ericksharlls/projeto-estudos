@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "predio")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "PredioLegal")
 public class Predio {
     
     //@NotNull(groups = Groups.PredioId.class)

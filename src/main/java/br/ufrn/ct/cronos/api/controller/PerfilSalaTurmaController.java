@@ -26,15 +26,11 @@ import br.ufrn.ct.cronos.api.model.PerfilSalaTurmaModel;
 import br.ufrn.ct.cronos.api.model.input.PerfilSalaTurmaInput;
 
 import br.ufrn.ct.cronos.domain.model.PerfilSalaTurma;
-import br.ufrn.ct.cronos.domain.repository.PerfilSalaTurmaRepository;
 import br.ufrn.ct.cronos.domain.service.CadastroPerfilSalaTurmaService;
 
 @RestController
 @RequestMapping(value = "/perfilSalaTurma", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PerfilSalaTurmaController{
-	
-	@Autowired
-	private PerfilSalaTurmaRepository perfilSalaTurmaRepository;
 	
 	@Autowired
 	private CadastroPerfilSalaTurmaService cadastroPerfilSalaTurma;
@@ -47,7 +43,7 @@ public class PerfilSalaTurmaController{
 	
 	@GetMapping
 	public Page<PerfilSalaTurmaModel> listar(@PageableDefault(size = 10) Pageable pageable){
-		Page<PerfilSalaTurma> perfisPage = perfilSalaTurmaRepository.findAll(pageable);
+		Page<PerfilSalaTurma> perfisPage = cadastroPerfilSalaTurma.findAll(pageable);
         Page<PerfilSalaTurmaModel> perfisModelPage = new PageImpl<>(
                 perfilSalaTurmaModelAssembler.toCollectionModel(perfisPage.getContent()),
                 pageable,

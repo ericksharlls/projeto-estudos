@@ -14,8 +14,8 @@
 	<name>cronos-api</name>
 	<description>API para testes</description>
 	<properties>
-		<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
-    	<!-- <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
 		<modelmapper.version>3.0.0</modelmapper.version>
 	</properties>
@@ -70,6 +70,21 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
+		<!-- Dependência do Spring Boot Cache-->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+		<!-- Dependência do EhCache -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 	</dependencies>
 
 	<build>

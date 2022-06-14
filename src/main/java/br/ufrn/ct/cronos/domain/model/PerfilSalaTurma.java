@@ -1,5 +1,7 @@
 package br.ufrn.ct.cronos.domain.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "perfil_sala_turma")
-public class PerfilSalaTurma {
+public class PerfilSalaTurma implements Serializable {
     
     @NotNull(groups = Groups.PerfilSalaTurmaId.class)
     @EqualsAndHashCode.Include

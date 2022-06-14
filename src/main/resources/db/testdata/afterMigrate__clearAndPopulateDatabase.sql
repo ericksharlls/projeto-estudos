@@ -65,10 +65,10 @@ INSERT INTO permissao_usuario (id_papel, id_usuario) VALUES (1, 1);
 
 INSERT INTO turma (codigo_componente_turma, nome_componente_turma, nome_docente_turma, horario_turma, capacidade_turma, numero_turma, 
         alunos_matriculados_turma, distribuir, local, id_perfil, id_predio, id_periodo, id_departamento, id_sala_temp, id_turma_sigaa) VALUES 
-    ('ARQ001', 'ARQUITETURA 01', NULL, '35M12', 50, 1, 0, 1, 'INDEFINIDO', 1, 2, 1, 1, NULL, 200100),
-    ('ARQ002', 'ARQUITETURA 02', NULL, '24T1234', 40, 1, 0, 1, 'INDEFINIDO', 3, 1, 1, 1, NULL, 200101),
+    ('ARQ001', 'ARQUITETURA 01', NULL, '35M12 7M456', 50, 1, 0, 1, 'INDEFINIDO', 1, 2, 1, 1, NULL, 200100),
+    ('ARQ002', 'ARQUITETURA 02', NULL, '25T56', 40, 1, 0, 1, 'INDEFINIDO', 3, 1, 1, 1, NULL, 200101),
     ('CIV001', 'CIVIL 01', NULL, '36M56', 20, 1, 0, 1, 'INDEFINIDO', 2, 2, 1, 2, NULL, 200102),
-    ('CIV001', 'CIVIL 01', NULL, '25T56', 30, 2, 0, 1, 'INDEFINIDO', 1, 2, 1, 2, NULL, 200103),
+    ('CIV001', 'CIVIL 01', NULL, '24T1234', 30, 2, 0, 1, 'INDEFINIDO', 1, 2, 1, 2, NULL, 200103),
     ('ELE001', 'ELETRICA 01', NULL, '25N34', 35, 1, 0, 1, 'INDEFINIDO', 3, 2, 1, 3, NULL, 200104);
 
 INSERT INTO turma_docente (id_turma, id_docente) VALUES 
@@ -98,13 +98,43 @@ INSERT INTO horario (id_horario, horario, inicio_horario, termino_horario, horar
 (16, 4, '21:26:00', '23:00:00', '21:50:00', 'N', '21:25:00', '22:15:00');
 
 INSERT INTO agendamento (motivo, id_funcionario, id_periodo, hora_realizacao_agendamento, id_usuario_sistema) VALUES 
-("Aula", 1, 1, '2022-06-06 12:00:00', 1);
+("Aula", 1, 1, '2022-06-06 12:00:00', 1),
+("Aula Legal", 1, 1, '2022-06-06 12:01:00', 1);
 
 INSERT INTO disponibilidade_sala (data_reserva, id_sala, id_periodo, id_horario_sala, id_turma, id_agendamento) VALUES 
+-- 35M12 7M456
 ('2022-06-07', 1, 1, 1, 1, 1),
 ('2022-06-09', 1, 1, 2, 1, 1),
 ('2022-06-14', 1, 1, 1, 1, 1),
-('2022-06-16', 1, 1, 2, 1, 1);
+('2022-06-16', 1, 1, 2, 1, 1),
+('2022-06-21', 1, 1, 1, 1, 1),
+('2022-06-23', 1, 1, 2, 1, 1),
+('2022-06-11', 2, 1, 4, 1, 1),
+('2022-06-11', 2, 1, 5, 1, 1),
+('2022-06-11', 2, 1, 6, 1, 1),
+('2022-06-18', 2, 1, 4, 1, 1),
+('2022-06-18', 2, 1, 5, 1, 1),
+('2022-06-18', 2, 1, 6, 1, 1),
+-- 24T1234
+('2022-06-06', 1, 1, 7, 4, 2),
+('2022-06-06', 1, 1, 8, 4, 2),
+('2022-06-06', 1, 1, 9, 4, 2),
+('2022-06-06', 1, 1, 10, 4, 2),
+
+('2022-06-08', 2, 1, 7, 4, 2),
+('2022-06-08', 2, 1, 8, 4, 2),
+('2022-06-08', 2, 1, 9, 4, 2),
+('2022-06-08', 2, 1, 10, 4, 2),
+
+('2022-06-13', 1, 1, 7, 4, 2),
+('2022-06-13', 1, 1, 8, 4, 2),
+('2022-06-13', 1, 1, 9, 4, 2),
+('2022-06-13', 1, 1, 10, 4, 2),
+
+('2022-06-15', 2, 1, 7, 4, 2),
+('2022-06-15', 2, 1, 8, 4, 2),
+('2022-06-15', 2, 1, 9, 4, 2),
+('2022-06-15', 2, 1, 10, 4, 2);
 
 -- INSERT INTO departamento (id_departamento, nome_departamento, descricao_departamento) VALUES 
 -- (1,'Departamento de Arquitetura','Departamento do Curso de Arquitetura e Urbanismo'),
