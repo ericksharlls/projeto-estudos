@@ -10,7 +10,7 @@ import lombok.Setter;
 public class PerfilSalaTurmaInput {
 
     @NotBlankAndSizeForString(max = 50)
-    private String nome;;;
+    private String nome;
     
     @NotBlankAndSizeForString(max = 100)
     private String descricao;

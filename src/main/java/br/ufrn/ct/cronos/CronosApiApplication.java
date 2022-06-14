@@ -4,6 +4,7 @@ import java.util.TimeZone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import br.ufrn.ct.cronos.infrastructure.repository.CustomJpaRepositoryImpl;
@@ -11,6 +12,7 @@ import br.ufrn.ct.cronos.infrastructure.repository.CustomJpaRepositoryImpl;
 // Por padrão, SimpleJpaRepository é a classe padrão de repositório JPA.. aqui alteramos para CustomJpaRepositoryImpl 
 @SpringBootApplication
 @EnableJpaRepositories(repositoryBaseClass = CustomJpaRepositoryImpl.class)
+@EnableCaching
 public class CronosApiApplication {
 
 	public static void main(String[] args) {

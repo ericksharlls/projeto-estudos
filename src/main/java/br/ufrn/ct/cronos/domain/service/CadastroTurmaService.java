@@ -25,7 +25,7 @@ public class CadastroTurmaService {
 	private SalaRepository salaRepository;
 
     @Autowired
-    private HorarioRepository horarioRepository;
+    private CadastroHorarioService horarioService;
 
     @Autowired
     private ManipuladorHorarioTurma manipuladorHorarioTurma;
@@ -52,7 +52,7 @@ public class CadastroTurmaService {
      	                }
      	                List<Long> idsHorarios = new ArrayList<Long>(0);
      	                for (int z = 0; z < horariosDoGrupo.length; z++) {
-     	                    idsHorarios.add(this.horarioRepository.findByTurnoAndHorario(turno, Integer.parseInt(horariosDoGrupo[z])).getId());
+     	                    idsHorarios.add(this.horarioService.findByTurnoAndHorario(turno, Integer.parseInt(horariosDoGrupo[z])).getId());
      	                }
      	                List<String> horarios =
      	                     this.turmaRepository.getHorariosPorTurmaESala(turma, arraySalas[i], turno, idsHorarios, stringsDias);

@@ -1,5 +1,6 @@
 package br.ufrn.ct.cronos.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,7 +20,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "horario")
-public class Horario {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Horario implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
