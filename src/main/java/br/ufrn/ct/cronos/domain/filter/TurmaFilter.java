@@ -1,4 +1,4 @@
-package br.ufrn.ct.cronos.domain.repository.filter;
+package br.ufrn.ct.cronos.domain.filter;
 
 import lombok.Getter;
 import lombok.Setter;

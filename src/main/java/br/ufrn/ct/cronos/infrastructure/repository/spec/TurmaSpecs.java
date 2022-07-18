@@ -2,8 +2,8 @@ package br.ufrn.ct.cronos.infrastructure.repository.spec;
 
 import java.util.ArrayList;
 
+import br.ufrn.ct.cronos.domain.filter.TurmaFilter;
 import br.ufrn.ct.cronos.domain.model.Turma;
-import br.ufrn.ct.cronos.domain.repository.filter.TurmaFilter;
 
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.JoinType;
@@ -15,11 +15,15 @@ public class TurmaSpecs {
 
     public static Specification<Turma> usandoFiltro(TurmaFilter filtro) {
 		return (root, query, builder) -> {
-            root.fetch("periodo");
-            root.fetch("departamento");
-			root.fetch("predio");
-			root.fetch("perfil");
-			root.fetch("docentes", JoinType.LEFT).fetch("tipoFuncionario", JoinType.LEFT);
+			// Como o Spring Data JPA usa a Specification tanto para o select quanto para o count da paginação, se esse
+			// if não for adicionado, dará erro ao fazer o count, pois o count não funciona junto com o fetch
+			if (Turma.class.equals(query.getResultType())) {
+				root.fetch("periodo");
+            	root.fetch("departamento");
+				root.fetch("predio");
+				root.fetch("perfil");
+				root.fetch("docentes", JoinType.LEFT).fetch("tipoFuncionario", JoinType.LEFT);
+			}
 			
 			query.distinct(true);
 

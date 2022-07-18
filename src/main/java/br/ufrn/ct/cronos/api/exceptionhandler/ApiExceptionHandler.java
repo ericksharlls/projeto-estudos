@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -39,10 +40,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	public static final String MSG_ERRO_GENERICA_USUARIO_FINAL
 		= "Ocorreu um erro interno inesperado no sistema. Tente novamente e se "
 				+ "o problema persistir, entre em contato com o administrador do sistema.";
-
+	
 	// MessageSource é uma interface q a implementação dela resolve mensagens
 	@Autowired
 	private MessageSource messageSource;
+
+	@Override
+	protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+		return handleValidationInternal(ex, ex.getBindingResult(), headers, status, request);
+	}
 
 	@ExceptionHandler({ ValidacaoException.class })
 	public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request) {
