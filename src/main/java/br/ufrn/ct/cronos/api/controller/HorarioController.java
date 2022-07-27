@@ -14,7 +14,6 @@ import br.ufrn.ct.cronos.domain.service.CadastroHorarioService;
 
 @RestController
 @RequestMapping(value = "/horarios", produces = MediaType.APPLICATION_JSON_VALUE)
-
 public class HorarioController {
 
     @Autowired

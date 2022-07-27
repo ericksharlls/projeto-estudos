@@ -13,24 +13,21 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode (onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "departamento")
-public class Departamento implements Serializable {
-    
+@Table(name = "status_importacao_turmas")
+public class StatusImportacaoTurmas implements Serializable {
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_departamento")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="nome_departamento")
-    private String nome;
+    @Column(name = "identificador")
+    private String identificador;
 
-    @Column(name="descricao_departamento")
+    @Column(name = "descricao")
     private String descricao;
-
-    @Column(name="id_departamento_sigaa")
-    private Long idSigaa;
     
 }

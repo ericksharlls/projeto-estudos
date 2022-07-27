@@ -15,6 +15,9 @@ TRUNCATE TABLE agendamento;
 TRUNCATE TABLE usuario;
 TRUNCATE TABLE papel_usuario;
 TRUNCATE TABLE permissao_usuario;
+TRUNCATE TABLE historico_importacoes_turmas;
+TRUNCATE TABLE importacoes_turmas;
+TRUNCATE TABLE status_importacao_turmas;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -40,10 +43,21 @@ INSERT INTO sala (nome_sala, descricao_sala, capacidade_sala, tipo_quadro_sala, 
 ("A4", "Sala A4", 35, "Branco", true, true, true, 2, 2),
 ("A5", "Sala A5", 35, "Branco", true, true, true, 2, 2);
 
-INSERT INTO departamento (nome_departamento, descricao_departamento, id_departamento_sigaa) VALUES 
-('DEPARTAMENTO DE ARQUITETURA', 'DEPARTAMENTO DE ARQUITETURA', 10090),
-('DEPARTAMENTO DE ENGENHARIA CIVIL', 'DEPARTAMENTO DE ENGENHARIA CIVIL', 10091),
-('DEPARTAMENTO DE ENGENHARIA ELÉTRICA', 'DEPARTAMENTO DE ENGENHARIA ELÉTRICA', 10092);
+INSERT INTO departamento (id_departamento, nome_departamento, descricao_departamento, id_departamento_sigaa) VALUES 
+(1,'Departamento de Arquitetura','Departamento do Curso de Arquitetura e Urbanismo',54),
+(2,'Departamento de Engenharia Biomédica','Departamento do Curso de Engenharia Biomédica',5205),
+(3,'Departamento de Engenharia Civil','Departamento do Curso de Engenharia Civil',52),
+(4,'Departamento de Engenharia de Computação e Automação','Departamento do Curso de Engenharia de Computação e Automação',56),
+(5,'Departamento de Engenharia de Comunicações','Departamento do Curso de Comunicações',5204),
+(6,'Departamento de Engenharia de Materiais','Departamento do Curso de Engenharia de Materiais',1589),
+(7,'Departamento de Engenharia de Petróleo','Departamento do Curso de Engenharia de Petróleo',5075),
+(8,'Departamento de Engenharia Elétrica','Departamento do Curso de Engenharia Elétrica',112),
+(9,'Departamento de Engenharia Mecânica','Departamento do Curso de Engenharia Mecânica',50),
+(10,'Departamento de Engenharia Produção','Departamento do Curso de Engenharia de Produção',115),
+(11,'Departamento de Engenharia Química','Departamento do Curso de Engenharia Mecânica',57),
+(12,'Departamento de Engenharia Têxtil','Departamento do Curso de Engenharia Têxtil',424),
+(13,'Coordenação do Curso de Engenharia Mecatrônica','Coordenação do Curso de Engenharia Mecatrônica',5632),
+(14,'DIVERSOS','Departamento para uma turma qualquer',0);
 
 INSERT INTO tipo_funcionario (nome_tipo_funcionario,descricao_tipo_funcionario) VALUES 
 ('Docente','Perfil Para Docentes'),
@@ -63,21 +77,26 @@ INSERT INTO papel_usuario (id_papel, nome_papel, descricao_papel) VALUES (1, 'RO
 
 INSERT INTO permissao_usuario (id_papel, id_usuario) VALUES (1, 1);
 
-INSERT INTO turma (codigo_componente_turma, nome_componente_turma, nome_docente_turma, horario_turma, capacidade_turma, numero_turma, 
-        alunos_matriculados_turma, distribuir, local, id_perfil, id_predio, id_periodo, id_departamento, id_sala_temp, id_turma_sigaa) VALUES 
-    ('ARQ001', 'ARQUITETURA 01', NULL, '35M12 7M456', 50, 1, 0, 1, 'INDEFINIDO', 1, 2, 1, 1, NULL, 200100),
-    ('ARQ002', 'ARQUITETURA 02', NULL, '25T56', 40, 1, 0, 1, 'INDEFINIDO', 3, 1, 1, 1, NULL, 200101),
-    ('CIV001', 'CIVIL 01', NULL, '36M56', 20, 1, 0, 1, 'INDEFINIDO', 2, 2, 1, 2, NULL, 200102),
-    ('CIV001', 'CIVIL 01', NULL, '24T1234', 30, 2, 0, 1, 'INDEFINIDO', 1, 2, 1, 2, NULL, 200103),
-    ('ELE001', 'ELETRICA 01', NULL, '25N34', 35, 1, 0, 1, 'INDEFINIDO', 3, 2, 1, 3, NULL, 200104);
+INSERT INTO status_importacao_turmas (id, identificador, descricao) VALUES 
+(1, 'CRIADA_AGUARDANDO_EXECUCAO', 'Criada e aguardando execução'),
+(2, 'ERRO_NA_EXECUCAO', 'Houve erro na execução'),
+(3, 'EXECUTADA_COM_SUCESSO', 'Executada com sucesso');
 
-INSERT INTO turma_docente (id_turma, id_docente) VALUES 
-(1, 1),
-(1, 2),
-(2, 1),
-(3, 3),
-(4, 2),
-(4, 3);
+--INSERT INTO turma (codigo_componente_turma, nome_componente_turma, nome_docente_turma, horario_turma, capacidade_turma, numero_turma, 
+--        alunos_matriculados_turma, distribuir, local, id_perfil, id_predio, id_periodo, id_departamento, id_sala_temp, id_turma_sigaa) VALUES 
+--    ('ARQ001', 'ARQUITETURA 01', NULL, '35M12 7M456', 50, 1, 0, 1, 'INDEFINIDO', 1, 2, 1, 1, NULL, 200100),
+--    ('ARQ002', 'ARQUITETURA 02', NULL, '25T56', 40, 1, 0, 1, 'INDEFINIDO', 3, 1, 1, 1, NULL, 200101),
+--    ('CIV001', 'CIVIL 01', NULL, '36M56', 20, 1, 0, 1, 'INDEFINIDO', 2, 2, 1, 2, NULL, 200102),
+--    ('CIV001', 'CIVIL 01', NULL, '24T1234', 30, 2, 0, 1, 'INDEFINIDO', 1, 2, 1, 2, NULL, 200103),
+--    ('ELE001', 'ELETRICA 01', NULL, '25N34', 35, 1, 0, 1, 'INDEFINIDO', 3, 2, 1, 3, NULL, 200104);
+
+--INSERT INTO turma_docente (id_turma, id_docente) VALUES 
+--(1, 1),
+--(1, 2),
+--(2, 1),
+--(3, 3),
+--(4, 2),
+--(4, 3);
 
 INSERT INTO horario (id_horario, horario, inicio_horario, termino_horario, horario_intermediario, turno, inicio_horario_absoluto, termino_horario_absoluto) VALUES
 (1, 1, '06:30:00', '07:50:59', '07:26:00', 'M', '07:00:00', '07:50:00'),
@@ -97,52 +116,44 @@ INSERT INTO horario (id_horario, horario, inicio_horario, termino_horario, horar
 (15, 3, '20:26:00', '21:25:59', '21:00:00', 'N', '20:35:00', '21:25:00'),
 (16, 4, '21:26:00', '23:00:00', '21:50:00', 'N', '21:25:00', '22:15:00');
 
-INSERT INTO agendamento (motivo, id_funcionario, id_periodo, hora_realizacao_agendamento, id_usuario_sistema) VALUES 
-("Aula", 1, 1, '2022-06-06 12:00:00', 1),
-("Aula Legal", 1, 1, '2022-06-06 12:01:00', 1);
+--INSERT INTO agendamento (motivo, id_funcionario, id_periodo, hora_realizacao_agendamento, id_usuario_sistema) VALUES 
+--("Aula", 1, 1, '2022-06-06 12:00:00', 1),
+--("Aula Legal", 1, 1, '2022-06-06 12:01:00', 1);
 
-INSERT INTO disponibilidade_sala (data_reserva, id_sala, id_periodo, id_horario_sala, id_turma, id_agendamento) VALUES 
+--INSERT INTO disponibilidade_sala (data_reserva, id_sala, id_periodo, id_horario_sala, id_turma, id_agendamento) VALUES 
 -- 35M12 7M456
-('2022-06-07', 1, 1, 1, 1, 1),
-('2022-06-09', 1, 1, 2, 1, 1),
-('2022-06-14', 1, 1, 1, 1, 1),
-('2022-06-16', 1, 1, 2, 1, 1),
-('2022-06-21', 1, 1, 1, 1, 1),
-('2022-06-23', 1, 1, 2, 1, 1),
-('2022-06-11', 2, 1, 4, 1, 1),
-('2022-06-11', 2, 1, 5, 1, 1),
-('2022-06-11', 2, 1, 6, 1, 1),
-('2022-06-18', 2, 1, 4, 1, 1),
-('2022-06-18', 2, 1, 5, 1, 1),
-('2022-06-18', 2, 1, 6, 1, 1),
+--('2022-06-07', 1, 1, 1, 1, 1),
+--('2022-06-09', 1, 1, 2, 1, 1),
+--('2022-06-14', 1, 1, 1, 1, 1),
+--('2022-06-16', 1, 1, 2, 1, 1),
+--('2022-06-21', 1, 1, 1, 1, 1),
+--('2022-06-23', 1, 1, 2, 1, 1),
+--('2022-06-11', 2, 1, 4, 1, 1),
+--('2022-06-11', 2, 1, 5, 1, 1),
+--('2022-06-11', 2, 1, 6, 1, 1),
+--('2022-06-18', 2, 1, 4, 1, 1),
+--('2022-06-18', 2, 1, 5, 1, 1),
+--('2022-06-18', 2, 1, 6, 1, 1),
 -- 24T1234
-('2022-06-06', 1, 1, 7, 4, 2),
-('2022-06-06', 1, 1, 8, 4, 2),
-('2022-06-06', 1, 1, 9, 4, 2),
-('2022-06-06', 1, 1, 10, 4, 2),
+--('2022-06-06', 1, 1, 7, 4, 2),
+--('2022-06-06', 1, 1, 8, 4, 2),
+--('2022-06-06', 1, 1, 9, 4, 2),
+--('2022-06-06', 1, 1, 10, 4, 2),
 
-('2022-06-08', 2, 1, 7, 4, 2),
-('2022-06-08', 2, 1, 8, 4, 2),
-('2022-06-08', 2, 1, 9, 4, 2),
-('2022-06-08', 2, 1, 10, 4, 2),
+--('2022-06-08', 2, 1, 7, 4, 2),
+--('2022-06-08', 2, 1, 8, 4, 2),
+--('2022-06-08', 2, 1, 9, 4, 2),
+--('2022-06-08', 2, 1, 10, 4, 2),
 
-('2022-06-13', 1, 1, 7, 4, 2),
-('2022-06-13', 1, 1, 8, 4, 2),
-('2022-06-13', 1, 1, 9, 4, 2),
-('2022-06-13', 1, 1, 10, 4, 2),
+--('2022-06-13', 1, 1, 7, 4, 2),
+--('2022-06-13', 1, 1, 8, 4, 2),
+--('2022-06-13', 1, 1, 9, 4, 2),
+--('2022-06-13', 1, 1, 10, 4, 2),
 
-('2022-06-15', 2, 1, 7, 4, 2),
-('2022-06-15', 2, 1, 8, 4, 2),
-('2022-06-15', 2, 1, 9, 4, 2),
-('2022-06-15', 2, 1, 10, 4, 2);
-
--- INSERT INTO departamento (id_departamento, nome_departamento, descricao_departamento) VALUES 
--- (1,'Departamento de Arquitetura','Departamento do Curso de Arquitetura e Urbanismo'),
--- (2,'Departamento de Engenharia Biomédica','Departamento do Curso de Engenharia Biomédica'),
--- (3,'Departamento de Engenharia Civil','Departamento do Curso de Engenharia Civil'),
--- (4,'Departamento de Engenharia de Computação e Automação','Departamento do Curso de Engenharia de Computação e Automação'),
--- (5,'Departamento de Engenharia de Comunicações','Departamento do Curso de Comunicações'),(6,'Departamento de Engenharia de Materiais','Departamento do Curso de Engenharia de Materiais'),(7,'Departamento de Engenharia de Petróleo','Departamento do Curso de Engenharia de Petróleo'),(8,'Departamento de Engenharia Elétrica','Departamento do Curso de Engenharia Elétrica'),(9,'Departamento de Engenharia Mecânica','Departamento do Curso de Engenharia Mecânica'),(10,'Departamento de Engenharia Produção','Departamento do Curso de Engenharia de Produção'),(11,'Departamento de Engenharia Química','Departamento do Curso de Engenharia Mecânica'),(12,'Departamento de Engenharia Têxtil','Departamento do Curso de Engenharia Têxtil'),(13,'Coordenação do Curso de Engenharia Mecatrônica','Coordenação do Curso de Engenharia Mecatrônica'),
--- (14,'DIVERSOS','Departamento para uma turma qualquer');
+--('2022-06-15', 2, 1, 7, 4, 2),
+--('2022-06-15', 2, 1, 8, 4, 2),
+--('2022-06-15', 2, 1, 9, 4, 2),
+--('2022-06-15', 2, 1, 10, 4, 2);
 
 -- INSERT INTO turma (id_turma, codigo_componente_turma, nome_componente_turma, nome_docente_turma, horario_turma,
 --  capacidade_turma, numero_turma, alunos_matriculados_turma, distribuir, local, id_perfil, id_predio, id_periodo, id_departamento, id_sala_temp, id_turma_sigaa) VALUES 

@@ -44,4 +44,30 @@
         </resources>
     </cache>
     
+    <!-- Cache do mapa com todos os Departamentos. Par chave/valor: <idSigaa, Departamento> -->
+    <cache alias="DepartamentoRepository.getMapAllWithIdSigaaKey">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.util.Map</value-type>
+        <expiry>
+            <tti unit="seconds">900</tti>
+        </expiry>
+        <resources>
+            <heap unit="entries">50</heap>
+            <offheap unit="MB">5</offheap>
+        </resources>
+    </cache>
+
+    <!-- Cache do mapa com todos os Status de Importação de Turmas. Par chave/valor: <idS, StatusImportacaoTurmas> -->
+    <cache alias="StatusImportacaoTurmasRepository.getMapAllWithIdentificadorKey">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.util.Map</value-type>
+        <expiry>
+            <tti unit="seconds">900</tti>
+        </expiry>
+        <resources>
+            <heap unit="entries">5</heap>
+            <offheap unit="MB">2</offheap>
+        </resources>
+    </cache>
+
 </config>

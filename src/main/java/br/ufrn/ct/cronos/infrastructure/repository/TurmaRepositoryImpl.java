@@ -59,7 +59,7 @@ public class TurmaRepositoryImpl implements CustomizedTurmaRepository {
         query.setParameter("idTurma", turma.getId());
         query.setParameter("turno", turno);
         query.setParameter("idSala", sala.getId());
-        query.setParameter("idPeriodo", turma.getPeriodo().getIdPeriodo());
+        query.setParameter("idPeriodo", turma.getPeriodo().getId());
         
         List<Object[]> objetos = query.getResultList();
         for (Object[] objects : objetos) {
